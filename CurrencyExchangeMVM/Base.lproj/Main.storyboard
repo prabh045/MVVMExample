@@ -60,6 +60,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Euro Exchange Rates" id="qXt-h0-VBf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="deH-az-Gl9">
+                            <connections>
+                                <action selector="editAction:" destination="BYZ-38-t0r" id="Gum-2p-vxI"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="f97-DA-a1H">
                             <connections>
                                 <segue destination="E8w-vB-jPf" kind="show" id="w6k-3X-1sC"/>
@@ -72,9 +77,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="577" y="52"/>
+            <point key="canvasLocation" x="480" y="52"/>
         </scene>
-        <!--Choose Currency-->
+        <!--Add Currency-->
         <scene sceneID="ble-pC-CqY">
             <objects>
                 <tableViewController id="E8w-vB-jPf" customClass="SymbolsTableViewController" customModule="CurrencyExchangeMVM" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,7 +118,7 @@
                             <outlet property="delegate" destination="E8w-vB-jPf" id="2Th-CX-uyb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Choose Currency" id="Ndu-Gb-llo"/>
+                    <navigationItem key="navigationItem" title="Add Currency" id="Ndu-Gb-llo"/>
                     <connections>
                         <segue destination="23C-xQ-m8t" kind="unwind" identifier="symbolSelected" unwindAction="unwindToCurrencyTable:" id="asd-7K-JqI"/>
                     </connections>
@@ -139,7 +144,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szX-04-g8B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197.10144927536234" y="51.5625"/>
+            <point key="canvasLocation" x="-317" y="52"/>
         </scene>
     </scenes>
 </document>

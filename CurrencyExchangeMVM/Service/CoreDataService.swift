@@ -24,8 +24,7 @@ class CoreDataService {
         
         let currencySymbolObject = NSManagedObject(entity: entity, insertInto: managedObjectContext)
         
-        //CSV because API needs CSV values for currency codes
-        currencySymbolObject.setValue(",\(currencyCode.code)", forKey: "code")
+        currencySymbolObject.setValue("\(currencyCode.code)", forKey: "code")
         
         do {
             try managedObjectContext.save()
@@ -50,11 +49,32 @@ class CoreDataService {
         
         do {
             let currency = try managedObjectContext.fetch(fetchRequest)
-             os_log("Fetched Currency Codes Successfully")
+            os_log("Fetched Currency Codes Successfully")
             return currency
         } catch {
             os_log("Error in fetching Currency Codes")
             return []
+        }
+    }
+    
+    static func deleteCurrencySymbol(_ code: NSManagedObject) -> Bool {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Cant get app delegate")
+        }
+        
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        managedObjectContext.delete(code)
+        
+        do {try managedObjectContext.save()
+            os_log("Currency Code deleted successfully")
+            //CurrencyService.defaultSymbols
+            return true
+        }
+        catch {
+            os_log("Could not save after deleting Object, Core data")
+            return false
         }
     }
 }

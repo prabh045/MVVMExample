@@ -17,15 +17,21 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var currencyTableView: UITableView!
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         //Retyrieving Curency Codes from Core Data
         currencyCodes = CoreDataService.fetchCurrencySymbol()
+        
+        guard currencyCodes.isEmpty == false else {
+            return
+        }
+        
         for currency in currencyCodes {
             let code = currency.value(forKeyPath: "code") as! String
-            CurrencyService.defaultSymbols += code
+            CurrencyService.defaultSymbols.append(code)
         }
         
         //Retrieveing Currency Values Via API
@@ -60,6 +66,36 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    //MARK: TableViewDelegateMethods
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let currencyCode = currencyViewModel.sortedCurrencyCodes[indexPath.row]
+        if editingStyle == .delete {
+            
+            
+            let codeToDelete = currencyCodes[indexPath.row]
+            if(CoreDataService.deleteCurrencySymbol(codeToDelete)) {
+                currencyViewModel.sortedCurrencyCodes.remove(at: indexPath.row)
+                currencyViewModel.boxDict.value[currencyCode] = nil
+                CurrencyService.updateDefaultSymbols(code: currencyCode)
+                tableView.deleteRows(at: [indexPath], with: .top)
+            }
+            
+        }
+    }
+
+    
+    //MARK: Actions
+    
+    @IBAction func editAction(_ sender: UIBarButtonItem) {
+        currencyTableView.setEditing(!currencyTableView.isEditing, animated: true)
+    }
+    
+    
     //MARK: Unwind Method
     
     @IBAction func unwindToCurrencyTable(_ unwindSegue: UIStoryboardSegue) {
@@ -74,7 +110,8 @@ class CurrencyViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         print("Data from symbolVC \(sourceViewController.selectedSymbol) ")
-        CurrencyService.defaultSymbols += ",\(sourceViewController.selectedSymbol.keys.first!)"
+    CurrencyService.defaultSymbols.append(sourceViewController.selectedSymbol.keys.first!)
+
         currencyViewModel.retrieveCurrencyValues()
         
     }

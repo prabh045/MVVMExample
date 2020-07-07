@@ -72,6 +72,8 @@ class SymbolsTableViewController: UITableViewController {
         //performSegue(withIdentifier: "symbolSelected", sender: self)
     }
     
+    //MARK: Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         print(selectedSymbol)

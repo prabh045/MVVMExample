@@ -19,15 +19,16 @@ enum CurrencyErrors: Error {
 
 class CurrencyService {
     
-    static private let api_key = "_Your_api_key_here_"
-    static public var defaultSymbols = "USD,INR,GBP"
+    static private let api_key = "YOUR_API_KEY"
+    static public var defaultSymbols = [String]()
     
     init() {
         
     }
     
     static func retrieveCurrencyData(completion: @escaping (CurrencyModel?,CurrencyErrors?) -> Void) {
-        let url = "http://data.fixer.io/api/latest?access_key=\(api_key)&symbols=\(defaultSymbols)&format=1"
+        let currencyCodes = defaultSymbols.joined(separator: ",")
+        let url = "http://data.fixer.io/api/latest?access_key=\(api_key)&symbols=\(currencyCodes)&format=1"
         let serviceUrl = URL(string: url)
         let serviceRequest = URLRequest(url: serviceUrl!)
         print("URL IS \(url)")
@@ -112,6 +113,16 @@ class CurrencyService {
             }
         }.resume()
         
+    }
+    
+    static func updateDefaultSymbols(code: String) {
+        print(defaultSymbols)
+        if let index =  defaultSymbols.firstIndex(of: code) {
+            defaultSymbols.remove(at: index)
+        } else {
+            print("No index found for \(code)")
+        }
+        print(defaultSymbols)
     }
     
     

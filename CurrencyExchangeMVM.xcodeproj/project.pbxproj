@@ -78,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F028AEB24B0B33E0067736D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F60DC7924A8D021006F9BDE /* CurrencyViewController.swift */,
+				7F885E6424AB73BC00F7F037 /* SymbolsTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		7F08C36224AA1C43005624E9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,17 +137,16 @@
 			children = (
 				7F60DC7524A8D021006F9BDE /* AppDelegate.swift */,
 				7F60DC7724A8D021006F9BDE /* SceneDelegate.swift */,
-				7F60DC7924A8D021006F9BDE /* CurrencyViewController.swift */,
-				7F885E6424AB73BC00F7F037 /* SymbolsTableViewController.swift */,
 				7F08C36524AA275B005624E9 /* CurrencyTableViewCell.swift */,
-				7F60DC7B24A8D021006F9BDE /* Main.storyboard */,
-				7F60DC7E24A8D026006F9BDE /* Assets.xcassets */,
-				7F60DC8024A8D026006F9BDE /* LaunchScreen.storyboard */,
-				7F60DC8324A8D026006F9BDE /* Info.plist */,
+				7F028AEB24B0B33E0067736D /* ViewControllers */,
 				7F08C36324AA1C4C005624E9 /* Models */,
 				7F08C36224AA1C43005624E9 /* Service */,
 				7F08C36424AA1C53005624E9 /* ViewModels */,
 				7FC3379E24AB1BCB00E2D7E2 /* Utilities */,
+				7F60DC7B24A8D021006F9BDE /* Main.storyboard */,
+				7F60DC7E24A8D026006F9BDE /* Assets.xcassets */,
+				7F60DC8024A8D026006F9BDE /* LaunchScreen.storyboard */,
+				7F60DC8324A8D026006F9BDE /* Info.plist */,
 				7F4F41DE24AF62EE00917648 /* CurrencySymbols.xcdatamodeld */,
 			);
 			path = CurrencyExchangeMVM;
